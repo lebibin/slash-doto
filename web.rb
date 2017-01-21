@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require_relative 'command'
 
 module SlashDoto
   class Web < Sinatra::Base
@@ -9,7 +10,8 @@ module SlashDoto
     post '/' do
       begin
         raise(InvalidTokenError) if params[:token].nil? || params[:token] != ENV['SLACK_TOKEN']
-        params[:text]
+        command = Command.new(params[:text])
+        command.execute
       rescue InvalidTokenError => e
         halt 401, "You. are. the. only. exception..."
       end
