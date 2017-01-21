@@ -8,10 +8,10 @@ module SlashDoto
     end
     post '/' do
       begin
-        raise(InvalidTokenError) unless params[:token] == ENV['SLACK_TOKEN']
+        raise(InvalidTokenError) if params[:token].nil? || params[:token] != ENV['SLACK_TOKEN']
         params[:text]
       rescue InvalidTokenError => e
-        "You. are. the. only. exception.."
+        halt 401, "You. are. the. only. exception..."
       end
     end
   end
