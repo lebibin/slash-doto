@@ -1,4 +1,5 @@
 require_relative 'commands/player'
+require_relative 'commands/search'
 
 module SlashDoto
   class Command
@@ -18,6 +19,8 @@ module SlashDoto
       case @command
       when 'player'
         Player.new(@parameter).response
+      when 'search'
+        Search.new(@parameter).response
       else
       end
     end
