@@ -1,3 +1,5 @@
+require_relative 'commands/player'
+
 module SlashDoto
   class Command
     VALID_COMMANDS = %w{
@@ -13,6 +15,11 @@ module SlashDoto
     end
 
     def execute
+      case @command
+      when 'player'
+        Player.new(@parameter).response
+      else
+      end
     end
 
     def valid?

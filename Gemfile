@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'foreman'
 gem 'dotenv'
 gem 'puma'
+gem 'json'
 
 group :test do
   gem 'rack-test'

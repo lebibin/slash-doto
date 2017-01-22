@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.opendota.com/api/players/296295895
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 22 Jan 2017 03:08:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d3175a7e8c3be290e517e2264cb3ae5881485054503; expires=Mon, 22-Jan-18
+        03:08:23 GMT; path=/; domain=.opendota.com; HttpOnly
+      X-Powered-By:
+      - Express
+      Vary:
+      - Origin, Accept-Encoding
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Etag:
+      - W/"304-hT+2qXf3N+VRngfE7fGW1g"
+      Server:
+      - cloudflare-nginx
+      Cf-Ray:
+      - 324fcd186716604e-MNL
+    body:
+      encoding: ASCII-8BIT
+      string: '{"tracked_until":null,"solo_competitive_rank":"3133","competitive_rank":"3406","mmr_estimate":{"estimate":3338,"stdDev":225.21101216414795,"n":20},"profile":{"account_id":296295895,"personaname":"Cr1t-","name":null,"cheese":0,"steamid":"76561198256561623","avatar":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/29/299ef2a034e624e21f49b76df2739748f7da9170.jpg","avatarmedium":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/29/299ef2a034e624e21f49b76df2739748f7da9170_medium.jpg","avatarfull":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/29/299ef2a034e624e21f49b76df2739748f7da9170_full.jpg","profileurl":"http://steamcommunity.com/profiles/76561198256561623/","last_login":null,"loccountrycode":null}}'
+    http_version: 
+  recorded_at: Sun, 22 Jan 2017 03:08:24 GMT
+recorded_with: VCR 3.0.3

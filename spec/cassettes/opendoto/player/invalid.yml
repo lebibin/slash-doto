@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.opendota.com/api/players/0000000000000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 22 Jan 2017 03:08:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d782f2782356d04ae2acbc0f321766d891485054504; expires=Mon, 22-Jan-18
+        03:08:24 GMT; path=/; domain=.opendota.com; HttpOnly
+      X-Powered-By:
+      - Express
+      Vary:
+      - Origin, Accept-Encoding
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Etag:
+      - W/"80-Y04oaNooVP7A0OsIjz7Aqg"
+      Server:
+      - cloudflare-nginx
+      Cf-Ray:
+      - 324fcd1b36fd60cc-MNL
+    body:
+      encoding: ASCII-8BIT
+      string: '{"tracked_until":null,"solo_competitive_rank":null,"competitive_rank":null,"mmr_estimate":{"estimate":null,"stdDev":null,"n":0}}'
+    http_version: 
+  recorded_at: Sun, 22 Jan 2017 03:08:24 GMT
+recorded_with: VCR 3.0.3
