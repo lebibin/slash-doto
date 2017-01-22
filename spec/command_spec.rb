@@ -4,9 +4,6 @@ require_relative '../command.rb'
 module SlashDoto
   describe Command do
     context 'initialized with no command' do
-      it 'should not raise error' do
-        expect{described_class.new}.to raise_error(ArgumentError)
-      end
       it 'should return false for #valid?' do
         expect(described_class.new(nil).valid?).to be(false)
       end

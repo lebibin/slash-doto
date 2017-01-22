@@ -10,7 +10,7 @@ module SlashDoto
     post '/' do
       begin
         raise(InvalidTokenError) if params[:token].nil? || params[:token] != ENV['SLACK_TOKEN']
-        command = Command.new(params[:text])
+        command = Command.new(params[:text], params)
         content_type :json
         JSON command.execute
       rescue InvalidTokenError

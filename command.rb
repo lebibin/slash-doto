@@ -7,20 +7,19 @@ module SlashDoto
       player
     }.freeze
 
-    def initialize text
-      unless text.nil?
-        @text = text.split(/\s+/)
-        @command = @text.first
-        @parameter = @text[1]
-      end
+    def initialize command = '', params = {}
+      @params = params
+      @text = (command || '').split(/\s+/)
+      @command = @text.first
+      @parameter = @text[1]
     end
 
     def execute
       case @command
       when 'player'
-        Player.new(@parameter).response
+        Player.new(@parameter, response_url: @params[:response_url]).response
       when 'search'
-        Search.new(@parameter).response
+        Search.new(@parameter, response_url: @params[:response_url]).response
       else
       end
     end

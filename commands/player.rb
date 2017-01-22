@@ -3,8 +3,9 @@ require 'json'
 module SlashDoto
   class Command
     class Player
-      def initialize account_id
+      def initialize account_id, options = {}
         @account_id = account_id || ""
+        @options = options
       end
 
       def response

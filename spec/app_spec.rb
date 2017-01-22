@@ -21,11 +21,6 @@ describe 'SlashDoto Application' do
         expect(last_response.body).to eq('You. are. the. only. exception...')
       end
     end
-    it 'should be successful with valid token' do
-      post '/', {token: 'validtoken'} do
-        expect(last_response).to be_ok
-      end
-    end
   end
   context 'GET /nonexistentpage' do
     it 'should be unsuccessful' do
