@@ -34,7 +34,6 @@ module SlashDoto
       def valid_response(r)
         {}.tap do |res|
           res['response_type'] = 'in_channel'
-          res['thumb_url'] = r['profile']['avatarmedium']
           res['attachments'] = []
           res['attachments'][0] = attachment_field(r)
         end
@@ -47,6 +46,7 @@ module SlashDoto
       def attachment_field(r)
         {}.tap do |res|
           res['color'] = '#36a64f'
+          res['thumb_url'] = r['profile']['avatarmedium']
           res['title'] = r['profile']['personaname']
           res['title_link'] = r['profile']['profileurl']
           res['fields'] = [
