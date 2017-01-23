@@ -1,13 +1,14 @@
+# frozen_string_literal: true
 require_relative 'commands/player'
 require_relative 'commands/search'
 
 module SlashDoto
   class Command
-    VALID_COMMANDS = %w{
+    VALID_COMMANDS = %w(
       player
-    }.freeze
+    ).freeze
 
-    def initialize command = '', params = {}
+    def initialize(command = '', params = {})
       @params = params
       @text = (command || '').split(/\s+/)
       @command = @text.first
@@ -20,7 +21,6 @@ module SlashDoto
         Player.new(@parameter, response_url: @params[:response_url]).response
       when 'search'
         Search.new(@parameter, response_url: @params[:response_url]).response
-      else
       end
     end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'sinatra/base'
 require_relative 'command'
 
@@ -14,7 +15,7 @@ module SlashDoto
         content_type :json
         JSON command.execute
       rescue InvalidTokenError
-        halt 401, "You. are. the. only. exception..."
+        halt 401, 'You. are. the. only. exception...'
       end
     end
   end
