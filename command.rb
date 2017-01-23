@@ -3,6 +3,7 @@ require_relative 'commands/player'
 require_relative 'commands/search'
 
 module SlashDoto
+  # :nodoc:
   class Command
     VALID_COMMANDS = %w(
       player

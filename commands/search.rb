@@ -3,6 +3,7 @@ require 'net/http'
 require 'json'
 module SlashDoto
   class Command
+    # :nodoc:
     class Search
       def initialize(personaname, options = {})
         @personaname = personaname || ''

@@ -3,6 +3,7 @@ require 'net/http'
 require 'json'
 module SlashDoto
   class Command
+    # :nodoc:
     class Player
       def initialize(account_id, options = {})
         @account_id = account_id || ''
