@@ -11,31 +11,23 @@ module SlashDoto
       end
 
       def response
-        initiate_search_request
+        Thread.new do
+          initiate_search_request
+        end
         immediate_response
       end
 
       private
 
       def initiate_search_request
-        Thread.new do
-          base_url = 'https://api.open.dota.com/api'
-          endpoint = "/search?similarity=0.5&q=#{@personaname}"
-          url = URI.parse("#{base_url}#{endpoint}")
-          req = Net::HTTP::Get.new(url.to_s)
-          res = Net::HTTP.start(url.host, url.port) do |http|
-            http.request(req)
-          end
-          parse_response res.body
+        base_url = 'http://api.opendota.com/api'
+        endpoint = "/search?similarity=0.5&q=#{@personaname}"
+        url = URI.parse("#{base_url}#{endpoint}")
+        req = Net::HTTP::Get.new(url.to_s)
+        res = Net::HTTP.start(url.host, url.port) do |http|
+          http.request(req)
         end
-      end
-
-      def parse_response(body)
-        parsed_res = JSON.parse body
-        body = prepare_body(parsed_res)
-        Net::HTTP.post(URI.parse(@options[:response_url]),
-                       body.to_json,
-                       'Content-Type' => 'application/json')
+        parse_response(res.body)
       end
 
       def immediate_response
@@ -43,6 +35,14 @@ module SlashDoto
           "response_type": 'ephemeral',
           "text": "Processing your search for `#{@personaname}`, please wait!"
         }
+      end
+
+      def parse_response(body)
+        parsed_res = JSON.parse(body)
+        body = prepare_body(parsed_res)
+        Net::HTTP.post(URI.parse(@options[:response_url]),
+                       body.to_json,
+                       'Content-Type' => 'application/json')
       end
 
       def prepare_body(parsed_response)
@@ -59,7 +59,8 @@ module SlashDoto
           results = response.first(10)
           sorted = results.sort { |x, y| y['similarity'] <=> x['similarity'] }
           sorted.each do |player|
-            attachments << parse_info(player)
+            p = parse_info(player)
+            attachments << p
           end
         end
       end
@@ -71,7 +72,7 @@ module SlashDoto
           info['title'] = player['personaname']
           info['text'] = player['account_id']
           info['thumb_url'] = player['avatarfull']
-          info['footer'] = "/doto player #{account_id}"
+          info['footer'] = "/doto player #{player['account_id']}"
         end
       end
 
