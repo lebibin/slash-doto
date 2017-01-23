@@ -11,7 +11,7 @@ module SlashDoto
     end
     post '/' do
       begin
-        raise(InvalidTokenError) if params[:token].nil? || params[:token] != ENV['SLACK_TOKEN']
+        raise(InvalidTokenError) if params[:token] != ENV['SLACK_TOKEN']
         command = Command.new(params[:text], params)
         content_type :json
         JSON command.execute
