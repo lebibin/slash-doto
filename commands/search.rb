@@ -50,17 +50,16 @@ module SlashDoto
           empty_result_response
         else
           attachments = build_attachments(parsed_response)
-          result_response(attachments)
+          result_response(parsed_response, attachments)
         end
       end
 
       def build_attachments(response)
         [].tap do |attachments|
-          results = response.first(10)
+          results = response.first(7)
           sorted = results.sort { |x, y| y['similarity'] <=> x['similarity'] }
           sorted.each do |player|
-            p = parse_info(player)
-            attachments << p
+            attachments << parse_info(player)
           end
         end
       end
@@ -76,11 +75,11 @@ module SlashDoto
         end
       end
 
-      def result_response(attachments)
+      def result_response(original_response, slack_attachments)
         {
           "response_type": 'in_channel',
-          "text": "Found #{attachments.count} for `#{@personaname}`",
-          "attachments": attachments
+          "text": "Found #{original_response.count} for `#{@personaname}`",
+          "attachments": slack_attachments
         }
       end
 
