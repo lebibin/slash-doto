@@ -5,6 +5,7 @@ require_relative 'commands/search'
 module SlashDoto
   # :nodoc:
   class Command
+    ACTION_PARAM_REGEX = /\A(\w+)\ {1}(.+)\z/
     VALID_COMMANDS = %w(
       player
     ).freeze
@@ -13,7 +14,7 @@ module SlashDoto
 
     def initialize(action = '', params = {})
       @params = params
-      @text = (action || '').split(/\s+/)
+      @text = (action || '').scan(ACTION_PARAM_REGEX).flatten
       @action = @text.first
       @parameter = @text[1]
     end
