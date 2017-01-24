@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'net/http'
 require 'json'
+require 'cgi'
 module SlashDoto
   class Command
     # :nodoc:
@@ -21,7 +22,8 @@ module SlashDoto
 
       def initiate_search_request
         base_url = 'http://api.opendota.com/api'
-        endpoint = "/search?similarity=0.5&q=#{@personaname}"
+        escaped_personaname = CGI.escapeHTML(@personaname)
+        endpoint = "/search?similarity=0.5&q=#{escaped_personaname}"
         url = URI.parse("#{base_url}#{endpoint}")
         req = Net::HTTP::Get.new(url.to_s)
         res = Net::HTTP.start(url.host, url.port) do |http|
