@@ -9,24 +9,26 @@ module SlashDoto
       player
     ).freeze
 
-    def initialize(command = '', params = {})
+    attr_reader :action, :parameter
+
+    def initialize(action = '', params = {})
       @params = params
-      @text = (command || '').split(/\s+/)
-      @command = @text.first
+      @text = (action || '').split(/\s+/)
+      @action = @text.first
       @parameter = @text[1]
     end
 
     def execute
-      case @command
+      case action
       when 'player'
-        Player.new(@parameter, response_url: @params[:response_url]).response
+        Player.new(parameter, response_url: @params[:response_url]).response
       when 'search'
-        Search.new(@parameter, response_url: @params[:response_url]).response
+        Search.new(parameter, response_url: @params[:response_url]).response
       end
     end
 
     def valid?
-      VALID_COMMANDS.include?(@command) && !@parameter.nil?
+      VALID_COMMANDS.include?(action) && !parameter.nil?
     end
   end
 end
