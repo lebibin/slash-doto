@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'net/http'
 require 'json'
+require_relative '../opendoto/api/player'
 module SlashDoto
   class Command
     # :nodoc:
@@ -24,18 +25,19 @@ module SlashDoto
 
       def parse_response(body)
         parsed_res = JSON.parse body
-        if parsed_res.key? 'profile'
-          valid_response parsed_res
+        player = OpenDoto::API::Player.new(parsed_res)
+        if player.valid?
+          valid_response_from(player)
         else
           invalid_response
         end
       end
 
-      def valid_response(r)
+      def valid_response_from(player)
         {}.tap do |res|
           res['response_type'] = 'in_channel'
           res['attachments'] = []
-          res['attachments'][0] = attachment_field(r)
+          res['attachments'][0] = attachment_field_for(player)
         end
       end
 
@@ -43,15 +45,15 @@ module SlashDoto
         {}
       end
 
-      def attachment_field(r)
+      def attachment_field_for(player)
         {}.tap do |res|
           res['color'] = '#36a64f'
-          res['thumb_url'] = r['profile']['avatarmedium']
-          res['title'] = r['profile']['personaname']
-          res['title_link'] = r['profile']['profileurl']
+          res['thumb_url'] = player.avatar(:medium)
+          res['title'] = player.persona_name
+          res['title_link'] = player.profile_url
           res['fields'] = [
-            mmr_field('Solo MMR', r['solo_competitive_rank']),
-            mmr_field('Party MMR', r['competitive_rank'])
+            mmr_field('Solo MMR', player.solo_mmr),
+            mmr_field('Party MMR', player.party_mmr)
           ]
         end
       end

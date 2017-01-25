@@ -8,6 +8,7 @@ require 'rack/test'
 require 'vcr'
 require 'dotenv'
 require File.expand_path '../../web.rb', __FILE__
+require_relative 'helpers'
 
 Dotenv.load(
   File.expand_path('../../.env.test', __FILE__)
@@ -29,4 +30,5 @@ end
 
 RSpec.configure do |c|
   c.include RSpecMixin
+  c.include Helpers
 end
