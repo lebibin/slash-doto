@@ -8,6 +8,10 @@ gem 'json'
 gem 'puma'
 gem 'sinatra'
 
+group :development do
+  gem 'pry'
+end
+
 group :test do
   gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'rack-test'

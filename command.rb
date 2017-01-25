@@ -12,11 +12,11 @@ module SlashDoto
 
     attr_reader :action, :parameter
 
-    def initialize(action = '', params = {})
-      @params = params
-      @text = (action || '').scan(ACTION_PARAM_REGEX).flatten
-      @action = @text.first
-      @parameter = @text[1]
+    def initialize(params = {})
+      parsed_params = stringify_keys(params).fetch(:text, '')
+                                            .scan(ACTION_PARAM_REGEX).flatten
+      @action = parsed_params.first
+      @parameter = parsed_params.last
     end
 
     def execute
@@ -30,6 +30,12 @@ module SlashDoto
 
     def valid?
       VALID_COMMANDS.include?(action) && !parameter.nil?
+    end
+
+    private
+
+    def stringify_keys(params)
+      @params = (params || {}).collect { |k, v| [k.to_sym, v] }.to_h
     end
   end
 end
