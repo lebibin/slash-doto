@@ -12,9 +12,8 @@ module SlashDoto
     post '/' do
       begin
         raise(InvalidTokenError) if params[:token] != ENV['SLACK_TOKEN']
-        command = Command.new(params)
         content_type :json
-        JSON command.execute
+        Command.new(params).call
       rescue InvalidTokenError
         halt 401, 'You. are. the. only. exception...'
       end

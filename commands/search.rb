@@ -15,7 +15,7 @@ module SlashDoto
         Thread.new do
           initiate_search_request
         end
-        immediate_response
+        JSON immediate_response
       end
 
       private

@@ -17,7 +17,7 @@ module SlashDoto
         res = Net::HTTP.start(url.host, url.port) do |http|
           http.request req
         end
-        parse_response res.body
+        JSON parse_response(res.body)
       end
 
       private

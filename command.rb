@@ -19,7 +19,7 @@ module SlashDoto
       @parameter = parsed_params.last
     end
 
-    def execute
+    def call
       case action
       when 'player'
         Player.new(parameter, response_url: @params[:response_url]).response
